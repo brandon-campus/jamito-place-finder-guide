@@ -56,7 +56,13 @@ const FilterSection = ({ onFilterChange }: FilterSectionProps) => {
   };
   
   const handlePriceChange = (value: number[]) => {
-    const newFilters = { ...filters, priceRange: [value[0], value[1]] as [number, number] };
+    // Ensure we always have two values for the price range tuple
+    const safeValues: [number, number] = [
+      value[0] || filters.priceRange[0], 
+      value[1] || filters.priceRange[1]
+    ];
+    
+    const newFilters = { ...filters, priceRange: safeValues };
     setFilters(newFilters);
     onFilterChange(newFilters);
   };
@@ -83,7 +89,7 @@ const FilterSection = ({ onFilterChange }: FilterSectionProps) => {
   };
   
   const clearFilters = () => {
-    const resetFilters = {
+    const resetFilters: FilterValues = {
       searchTerm: '',
       priceRange: [1, 4],
       ambience: [],
@@ -96,31 +102,31 @@ const FilterSection = ({ onFilterChange }: FilterSectionProps) => {
 
   return (
     <div className="mb-8 bg-white rounded-lg border shadow-sm p-4">
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
-          <Input
-            placeholder="Buscar lugares..."
-            className="pl-9"
-            value={filters.searchTerm}
-            onChange={handleSearchChange}
-          />
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Input
+              placeholder="Buscar lugares..."
+              className="pl-9"
+              value={filters.searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
+          
+          <CollapsibleTrigger asChild>
+            <Button variant="outline" className="flex items-center gap-1">
+              <Filter className="h-4 w-4 mr-1" />
+              <span>Filtros</span>
+              {isOpen ? (
+                <ChevronUp className="h-4 w-4 ml-1" />
+              ) : (
+                <ChevronDown className="h-4 w-4 ml-1" />
+              )}
+            </Button>
+          </CollapsibleTrigger>
         </div>
         
-        <CollapsibleTrigger asChild onClick={() => setIsOpen(!isOpen)}>
-          <Button variant="outline" className="flex items-center gap-1">
-            <Filter className="h-4 w-4 mr-1" />
-            <span>Filtros</span>
-            {isOpen ? (
-              <ChevronUp className="h-4 w-4 ml-1" />
-            ) : (
-              <ChevronDown className="h-4 w-4 ml-1" />
-            )}
-          </Button>
-        </CollapsibleTrigger>
-      </div>
-      
-      <Collapsible open={isOpen}>
         <CollapsibleContent className="pt-4">
           <div className="space-y-4">
             <div>
