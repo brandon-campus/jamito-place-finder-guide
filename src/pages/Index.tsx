@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import Header from '@/components/Header';
+// import Header from '@/components/Header';
 import JamitoChat from '@/components/JamitoChat';
 import CategorySelector from '@/components/CategorySelector';
 import FilterSection, { FilterValues } from '@/components/FilterSection';
@@ -83,7 +82,18 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <div className="bg-white shadow-md">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center">
+            <img src="/path/to/logo.png" alt="Logo" className="h-8 w-auto" />
+          </div>
+          <div className="flex space-x-4">
+            <a href="#" className="text-gray-700 hover:text-gray-900">Inicio</a>
+            <a href="#" className="text-gray-700 hover:text-gray-900">Jamito</a>
+            <a href="#" className="text-gray-700 hover:text-gray-900">Filtrar</a>
+          </div>
+        </div>
+      </div>
       
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
