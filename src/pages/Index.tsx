@@ -89,7 +89,7 @@ const Index = () => {
           </div>
           <div className="flex space-x-4">
             <a href="#" className="text-gray-700 hover:text-gray-900">Inicio</a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">Jamito</a>
+            <a href="/jamito-chat" className="text-gray-700 hover:text-gray-900">Jamito</a>
             <a href="#" className="text-gray-700 hover:text-gray-900">Filtrar</a>
           </div>
         </div>
